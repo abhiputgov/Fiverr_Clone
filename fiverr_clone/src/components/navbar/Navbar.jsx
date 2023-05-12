@@ -1,8 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Navbar.scss';
 
 const Navbar = () => {
   const [active, setActive] = useState(false);
+  const isActive = () => {
+    window.scrollY > 0 ? setActive(true) : setActive(false);
+  };
+  useEffect(() => {
+    window.addEventListener('scroll', isActive);
+    return () => {
+      window.removeEventListener('scroll', isActive);
+    };
+  }, []);
+
+  const currentUser = {
+    id: 1,
+    usename: 'voldemort',
+    isSeller: true,
+  };
   return (
     <div className={active ? 'navbar active' : 'navbar'}>
       <div className="container">
@@ -14,16 +29,22 @@ const Navbar = () => {
           <span>Fiverr Business</span>
           <span>Explore</span>
           <span>English</span>
-          <span>Sign In</span>
-          <span>Become a Seller</span>
-          <button className="joinBtn">Join</button>
+          {!currentUser ? <span>Sign In</span> : <></>}
+          {!currentUser?.isSeller ? <span>Become a Seller</span> : <></>}
+          {!currentUser ? <button className="joinBtn">Join</button> : <></>}
         </div>
       </div>
-      <hr />
-      <div className="menu">
-        <span>Test</span>
-        <span>Test2</span>
-      </div>
+      {active ? (
+        <>
+          <hr />
+          <div className="menu">
+            <span>Test</span>
+            <span>Test2</span>
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

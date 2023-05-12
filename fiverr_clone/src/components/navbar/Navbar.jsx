@@ -3,6 +3,7 @@ import './Navbar.scss';
 
 const Navbar = () => {
   const [active, setActive] = useState(false);
+  const [open, setOpen] = useState(false);
   const isActive = () => {
     window.scrollY > 0 ? setActive(true) : setActive(false);
   };
@@ -13,11 +14,12 @@ const Navbar = () => {
     };
   }, []);
 
-  const currentUser = {
+  let currentUser = {
     id: 1,
-    usename: 'voldemort',
+    username: 'shitStorm',
     isSeller: true,
   };
+
   return (
     <div className={active ? 'navbar active' : 'navbar'}>
       <div className="container">
@@ -30,8 +32,36 @@ const Navbar = () => {
           <span>Explore</span>
           <span>English</span>
           {!currentUser ? <span>Sign In</span> : <></>}
-          {!currentUser?.isSeller ? <span>Become a Seller</span> : <></>}
-          {!currentUser ? <button className="joinBtn">Join</button> : <></>}
+          {!currentUser?.isSeller && <span>Become a Seller</span>}
+          {!currentUser && <button className="joinBtn">Join</button>}
+          {currentUser && (
+            <div
+              className="user"
+              onClick={() => {
+                setOpen(!open);
+              }}
+            >
+              <img
+                className="userDP"
+                src="https://shorturl.at/ktIRX"
+                alt="XD"
+              />
+              <span>{currentUser?.username}</span>
+              {open && (
+                <div className="options">
+                  {currentUser?.isSeller && (
+                    <>
+                      <span>Gigs</span>
+                      <span>Add New Gig</span>
+                    </>
+                  )}
+                  <span>Orders</span>
+                  <span>Messages</span>
+                  <span>Logout</span>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
       {active ? (

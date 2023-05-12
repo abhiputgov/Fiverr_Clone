@@ -9,7 +9,25 @@
   top: 0;
   &.active {
     background-color: white;
-    color: black;
+    color: #1dbf73;
+
+    .container {
+      .logo {
+        .dot {
+          color: darkgreen;
+        }
+      }
+      .links {
+        button {
+          color: #1dbf73;
+          border: 1px solid #1dbf73;
+          &:hover {
+            background-color: darkgreen;
+            border-color: white;
+          }
+        }
+      }
+    }
   }
   .container {
     width: 1400px;
@@ -17,20 +35,50 @@
     justify-content: space-between;
     padding: 20px 0px;
     .logo {
+      display: flex;
+      justify-self: start;
       font-size: 34px;
       font-weight: bold;
-      .text {
-      }
       .dot {
         color: #1dbf73;
       }
     }
     .links {
       display: flex;
+      justify-self: end;
       gap: 24px;
       font-weight: 500;
       align-items: center;
       font-family: Montserrat sans-serif;
+
+      .user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        .userDP {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+        .options {
+          display: flex;
+          position: absolute;
+          top: 50px;
+          right: 0;
+          padding: 20px;
+          background-color: white;
+          border-radius: 10px;
+          border: 1px solid grey;
+          gap: 10px;
+          color: grey;
+          width: 200px;
+          font-weight: 300;
+          flex-direction: column;
+        }
+      }
+
       button {
         color: white;
         padding: 10px 20px;

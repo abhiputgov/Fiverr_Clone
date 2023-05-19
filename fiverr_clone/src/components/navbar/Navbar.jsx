@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.scss';
 
 const Navbar = () => {
@@ -24,8 +25,16 @@ const Navbar = () => {
     <div className={active ? 'navbar active' : 'navbar'}>
       <div className="container">
         <div className="logo">
-          <span className="text">fiverr</span>
-          <span className="dot">.</span>
+          <Link
+            className="link"
+            to={'/'}
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            <span className="text">fiverr</span>
+            <span className="dot">.</span>
+          </Link>
         </div>
         <div className="links">
           <span>Fiverr Business</span>
@@ -51,12 +60,20 @@ const Navbar = () => {
                 <div className="options">
                   {currentUser?.isSeller && (
                     <>
-                      <span>Gigs</span>
-                      <span>Add New Gig</span>
+                      <Link to={'/gigs'} className="link">
+                        <span>Gigs</span>
+                      </Link>
+                      <Link to={'/add'} className="link">
+                        <span>Add New Gig</span>
+                      </Link>
                     </>
                   )}
-                  <span>Orders</span>
-                  <span>Messages</span>
+                  <Link className="link" to={'/orders'}>
+                    <span>Orders</span>
+                  </Link>
+                  <Link className="link" to={'/messages'}>
+                    <span>Messages</span>
+                  </Link>
                   <span>Logout</span>
                 </div>
               )}

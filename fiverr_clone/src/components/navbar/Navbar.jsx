@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.scss';
 
 const Navbar = () => {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
   const isActive = () => {
     window.scrollY > 0 ? setActive(true) : setActive(false);
   };
@@ -22,7 +23,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className={active ? 'navbar active' : 'navbar'}>
+    <div className={active || pathname !== '/' ? 'navbar active' : 'navbar'}>
       <div className="container">
         <div className="logo">
           <Link
@@ -60,21 +61,21 @@ const Navbar = () => {
                 <div className="options">
                   {currentUser?.isSeller && (
                     <>
-                      <Link to={'/gigs'} className="link">
-                        <span>Gigs</span>
+                      <Link to={'/mygigs'} className="link">
+                        Gigs
                       </Link>
-                      <Link to={'/add'} className="link">
-                        <span>Add New Gig</span>
+                      <Link to={'/addGig'} className="link">
+                        Add New Gig
                       </Link>
                     </>
                   )}
                   <Link className="link" to={'/orders'}>
-                    <span>Orders</span>
+                    Orders
                   </Link>
                   <Link className="link" to={'/messages'}>
-                    <span>Messages</span>
+                    Messages
                   </Link>
-                  <span>Logout</span>
+                  <Link className="link">Logout</Link>
                 </div>
               )}
             </div>

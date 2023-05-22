@@ -33,14 +33,12 @@ function App() {
         { path: '/gig:id', element: <Gig /> },
         { path: '/orders', element: <Orders /> },
         { path: '/mygigs', element: <MyGigs /> },
-        { path: '/add', element: <Add /> },
+        { path: '/addGig', element: <Add /> },
         { path: '/messages', element: <Messages /> },
         { path: '/message:id', element: <Message /> },
       ],
     },
   ]);
-
-  const [count, setCount] = useState(0);
 
   return (
     <div>

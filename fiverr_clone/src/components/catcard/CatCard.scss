@@ -2,9 +2,11 @@
   width: 252px;
   height: 344px;
   color: white;
-  border-radius: 5px;
+  border-radius: 10px;
   position: relative;
   cursor: pointer;
+  -webkit-boxshadow: 0px 0px 16pb -6px rgba(0, 0, 0, 0.59);
+  box-shadow: 0px 0px 16px -6px rgba(0, 0, 0, 0.59);
 
   img {
     width: 100%;

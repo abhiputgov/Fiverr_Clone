@@ -1,10 +1,11 @@
-import React from "react";
-import "./Home.scss";
-import Featured from "../../components/featured/Featured";
-import TrustedBy from "../../components/trustedBy/TrustedBy";
-import Slide from "../../components/slide/Slide";
-import CatCard from "../../components/catcard/catCard";
-import { cards } from "../../data";
+import React from 'react';
+import './Home.scss';
+import Featured from '../../components/featured/Featured';
+import TrustedBy from '../../components/trustedBy/TrustedBy';
+import Slide from '../../components/slide/Slide';
+import CatCard from '../../components/catcard/catCard';
+import ProjectCard from '../../components/projectcard/ProjectCard';
+import { cards, projects } from '../../data';
 
 const Home = () => {
   return (
@@ -63,6 +64,11 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Slide slidesToShow={4} arrowsScroll={4}>
+        {projects.map((projects) => (
+          <ProjectCard key={projects.id} card={projects} />
+        ))}
+      </Slide>
     </div>
   );
 };

@@ -2,20 +2,20 @@ import React from 'react';
 import './GigCard.scss';
 import { Link } from 'react-router-dom';
 
-const GigCard = ({ item }) => {
+const GigCard = ({ card }) => {
   return (
     <Link to="/gig/123" className="link">
       <div className="gigCard">
-        <img src={item.img} alt="" />
+        <img src={card.img} alt="" />
         <div className="info">
           <div className="user">
-            <img src={item.pp} alt="" />
-            <span>{item.username}</span>
+            <img src={card.pp} alt="" />
+            <span>{card.username}</span>
           </div>
-          <p>{item.desc}</p>
+          <p>{card.desc}</p>
           <div className="star">
             <img src="./img/star.png" alt="" />
-            <span>{item.star}</span>
+            <span>{card.star}</span>
           </div>
         </div>
         <hr />
@@ -24,7 +24,7 @@ const GigCard = ({ item }) => {
           <div className="price">
             <span>STARTING AT</span>
             <h2>
-              $ {item.price}
+              $ {card.price}
               <sup>99</sup>
             </h2>
           </div>

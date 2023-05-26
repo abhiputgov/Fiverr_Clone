@@ -6,9 +6,10 @@
   color: white;
 
   .container {
-    width: 1400px;
+    width: 90%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     .left {
       display: flex;

@@ -16,7 +16,13 @@ const Featured = () => {
           </div>
           <div className="popular">
             <span>Popular:</span>
-            <button>Web Design</button>
+            <button
+              onClick={() => {
+                alert('What are you doing?');
+              }}
+            >
+              Web Design
+            </button>
             <button>Wordpress</button>
             <button>Logo Design</button>
             <button>AI Services</button>

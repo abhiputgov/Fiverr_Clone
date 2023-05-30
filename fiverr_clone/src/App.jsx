@@ -35,7 +35,7 @@ function App() {
         { path: '/mygigs', element: <MyGigs /> },
         { path: '/addGig', element: <Add /> },
         { path: '/messages', element: <Messages /> },
-        { path: '/message:id', element: <Message /> },
+        { path: '/message/:id', element: <Message /> },
       ],
     },
   ]);

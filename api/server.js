@@ -3,6 +3,7 @@ dotenv.config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 //routes
 const userRoute = require("./routes/user.route");
 const gigRoute = require("./routes/gig.route");
@@ -13,6 +14,8 @@ const reviewRoute = require("./routes/review.route");
 const authRoute = require("./routes/auth.route");
 
 //middleware
+app.use(express.json());
+app.use(cookieParser());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/gigs", gigRoute);

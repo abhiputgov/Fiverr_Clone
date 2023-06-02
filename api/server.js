@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 //routes
 const userRoute = require('./routes/user.route');
 const gigRoute = require('./routes/gig.route');
@@ -16,6 +17,7 @@ const authRoute = require('./routes/auth.route');
 //middleware
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({ origin: 'http://localhost:5173', Credentials: true }));
 app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);
 app.use('/api/gigs', gigRoute);

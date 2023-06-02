@@ -10,6 +10,7 @@ import Message from './pages/message/Message';
 import Messages from './pages/messages/Messages';
 import MyGigs from './pages/myGigs/MyGigs';
 import Orders from './pages/orders/Orders';
+import Login from './pages/login/Login';
 import './App.scss';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         { path: '/addGig', element: <Add /> },
         { path: '/messages', element: <Messages /> },
         { path: '/message/:id', element: <Message /> },
+        { path: '/login', element: <Login /> },
       ],
     },
   ]);

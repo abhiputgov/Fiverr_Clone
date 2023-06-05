@@ -13,10 +13,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await newRequest.post('/api/auth/login', {
-        username,
-        password,
-      });
+      const res = await newRequest.post('/auth/login', { username, password });
       localStorage.setItem('currentUser', JSON.stringify(res.data));
       navigate('/');
     } catch (err) {
@@ -32,7 +29,7 @@ function Login() {
         <input
           name="username"
           type="text"
-          placeholder="My username"
+          placeholder="johndoe"
           onChange={(e) => setUsername(e.target.value)}
         />
 

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const { mongoose } = require('mongoose');
 const { Schema } = mongoose;
 
 const GigSchema = new Schema(
@@ -70,7 +70,7 @@ const GigSchema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
-
-export default mongoose.model("Gig", GigSchema);
+const Gig = mongoose.model('Gig', GigSchema);
+module.exports = Gig;

@@ -1,7 +1,7 @@
-import Gig from '../models/gig.model.js';
-import createError from '../utils/createError.js';
+const Gig = require('../models/gig.model.js');
+const createError = require('../utils/createError.js');
 
-export const createGig = async (req, res, next) => {
+const createGig = async (req, res, next) => {
   if (!req.isSeller)
     return next(createError(403, 'Only sellers can create a gig!'));
 
@@ -17,7 +17,7 @@ export const createGig = async (req, res, next) => {
     next(err);
   }
 };
-export const deleteGig = async (req, res, next) => {
+const deleteGig = async (req, res, next) => {
   try {
     const gig = await Gig.findById(req.params.id);
     if (gig.userId !== req.userId)
@@ -29,7 +29,7 @@ export const deleteGig = async (req, res, next) => {
     next(err);
   }
 };
-export const getGig = async (req, res, next) => {
+const getGig = async (req, res, next) => {
   try {
     const gig = await Gig.findById(req.params.id);
     if (!gig) next(createError(404, 'Gig not found!'));
@@ -38,7 +38,7 @@ export const getGig = async (req, res, next) => {
     next(err);
   }
 };
-export const getGigs = async (req, res, next) => {
+const getGigs = async (req, res, next) => {
   const q = req.query;
   const filters = {
     ...(q.userId && { userId: q.userId }),
@@ -58,3 +58,5 @@ export const getGigs = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports = { createGig, deleteGig, getGig, getGigs };

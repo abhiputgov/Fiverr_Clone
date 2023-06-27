@@ -1,18 +1,26 @@
 import React, { useRef, useState } from 'react';
 import './Gigs.scss';
-import { gigs } from '../../data';
 import GigCard from '../../components/gigcard/GigCard';
 import { useQuery } from '@tanstack/react-query';
+import newRequest from '../../utils/newRequest';
+import { useLocation } from 'react-router-dom';
 
 function Gigs() {
   const [sort, setSort] = useState('sales');
   const [open, setOpen] = useState(false);
   const minRef = useRef();
   const maxRef = useRef();
+  const { search } = useLocation();
 
-  const { isPending, error, data } = useQuery({
-    queryKey: [repoData],
-    queryFn: () => {},
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['gigs'],
+    queryFn: () => {
+      return newRequest
+        .get(
+          `/gigs${search}&min=${minRef.current.value}&max=${maxRef.current.value}`,
+        )
+        .then((results) => results.data);
+    },
   });
   const reSort = (type) => {
     setSort(type);
@@ -64,9 +72,11 @@ function Gigs() {
           </div>
         </div>
         <div className="cards">
-          {gigs.map((gig) => (
-            <GigCard key={gig.id} card={gig} />
-          ))}
+          {isLoading
+            ? 'Loading'
+            : error
+            ? 'Something Went Wrong'
+            : data.map((gig) => <GigCard key={gig._id} card={gig} />)}
         </div>
       </div>
     </div>

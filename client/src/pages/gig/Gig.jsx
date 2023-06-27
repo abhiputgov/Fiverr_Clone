@@ -1,14 +1,21 @@
-import React from 'react';
-import './Gig.scss';
-import { Slider } from 'infinite-react-carousel/lib';
+import React from "react";
+import "./Gig.scss";
+import { Slider } from "infinite-react-carousel/lib";
 
 function Gig() {
+  const { isLoading, error, data } = useQuery({
+    queryKey: [card.userId],
+    queryFn: () =>
+      newRequest.get(`/users/${card.userId}`).then((res) => {
+        return res.data;
+      }),
+  });
   return (
     <div className="gig">
       <div className="container">
         <div className="left">
           <span className="breadcrumbs">
-            Liverr {'>'} Graphics & Design {'>'}
+            Liverr {">"} Graphics & Design {">"}
           </span>
           <h1>I will create ai generated art for you</h1>
           <div className="user">

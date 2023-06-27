@@ -1,23 +1,23 @@
-import React, { useRef, useState } from 'react';
-import './Gigs.scss';
-import GigCard from '../../components/gigcard/GigCard';
-import { useQuery } from '@tanstack/react-query';
-import newRequest from '../../utils/newRequest';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from "react";
+import "./Gigs.scss";
+import GigCard from "../../components/gigcard/GigCard";
+import { useQuery } from "@tanstack/react-query";
+import newRequest from "../../utils/newRequest";
+import { useLocation } from "react-router-dom";
 
 function Gigs() {
-  const [sort, setSort] = useState('sales');
+  const [sort, setSort] = useState("sales");
   const [open, setOpen] = useState(false);
   const minRef = useRef();
   const maxRef = useRef();
   const { search } = useLocation();
 
-  const { isLoading, error, data } = useQuery({
-    queryKey: ['gigs'],
+  const { isLoading, error, data, refetch } = useQuery({
+    queryKey: ["gigs"],
     queryFn: () => {
       return newRequest
         .get(
-          `/gigs${search}&min=${minRef.current.value}&max=${maxRef.current.value}`,
+          `/gigs${search}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sort}`
         )
         .then((results) => results.data);
     },
@@ -27,16 +27,19 @@ function Gigs() {
     setOpen(false);
   };
 
+  useEffect(() => {
+    refetch();
+  }, [sort]);
+
   const apply = () => {
-    console.log(minRef.current.value);
-    console.log(maxRef.current.value);
+    refetch();
   };
 
   return (
     <div className="gigs">
       <div className="container">
         <span className="breadcrumbs">
-          Fiverr {'>'} Graphics & Design {'>'}
+          Fiverr {">"} Graphics & Design {">"}
         </span>
         <h1>AI Artists</h1>
         <p>
@@ -52,30 +55,30 @@ function Gigs() {
           <div className="right">
             <span className="sortBy">Sort by</span>
             <span className="sortType">
-              {sort === 'sales'
-                ? 'Best Selling'
-                : sort === 'popular'
-                ? 'Popular'
-                : 'Newest'}
+              {sort === "sales"
+                ? "Best Selling"
+                : sort === "popular"
+                ? "Popular"
+                : "Newest"}
             </span>
             <img src="./img/down.png" alt="" onClick={() => setOpen(!open)} />
             {open && (
               <div className="rightMenu">
-                {sort === 'sales' ? (
-                  <span onClick={() => reSort('createdAt')}>Newest</span>
+                {sort === "sales" ? (
+                  <span onClick={() => reSort("createdAt")}>Newest</span>
                 ) : (
-                  <span onClick={() => reSort('sales')}>Best Selling</span>
+                  <span onClick={() => reSort("sales")}>Best Selling</span>
                 )}
-                <span onClick={() => reSort('popular')}>Popular</span>
+                <span onClick={() => reSort("popular")}>Popular</span>
               </div>
             )}
           </div>
         </div>
         <div className="cards">
           {isLoading
-            ? 'Loading'
+            ? "Loading"
             : error
-            ? 'Something Went Wrong'
+            ? "Something Went Wrong"
             : data.map((gig) => <GigCard key={gig._id} card={gig} />)}
         </div>
       </div>
